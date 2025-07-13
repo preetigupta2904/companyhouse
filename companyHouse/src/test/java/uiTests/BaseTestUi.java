@@ -9,6 +9,7 @@ import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.ITestResult;
 import org.testng.annotations.*;
 
@@ -20,11 +21,9 @@ import org.apache.commons.io.FileUtils;
 
 public class BaseTestUi {
     public ExtentTest test;
-    //static ExtentReports report;
     public ExtentSparkReporter htmlReport;
     public ExtentReports extent;
-    WebDriver driver;
-
+    public  WebDriver driver;
 
     @BeforeMethod
     @Parameters("url")
@@ -32,15 +31,16 @@ public class BaseTestUi {
 
         System.setProperty("webdriver.chrome.driver", "/Applications/chromedriver-mac-x64/chromedriver");
 
-        driver = new ChromeDriver();
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("--remote-allow-origins=*");
+        options.addArguments("--disable-dev-shm-usage");
+        options.addArguments("--no-sandbox");
+        options.addArguments("--disable-gpu");
+
+        driver = new ChromeDriver(options);
         driver.manage().window().maximize();
         driver.get(url);
         return driver;
-    }
-
-  //  @AfterMethod
-    public void tearDown() {
-        driver.quit();
     }
 
     @BeforeTest

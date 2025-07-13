@@ -6,9 +6,8 @@
         <parameter name="url" value="https://automationintesting.online"/>
 
         <classes>
-            <class name="uiTests.Tests_homePage">
-
-            </class>
+            <class name="uiTests.Tests_homePage"/>
+            <class name="nonFunctionalTest.AccessibilityTest"/>
         </classes>
     </test> <!-- Test -->
 </suite> <!-- Suite -->
